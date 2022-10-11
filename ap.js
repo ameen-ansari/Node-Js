@@ -1,0 +1,1 @@
+let sunS = (a, b) => { let sum = a + b; console.log(sum); return sum }; sunS(12, 8)

@@ -11,3 +11,12 @@
 // a = os.type()
 // a = os
 // console.log(a);
+
+const http = require('http')
+http.createServer((req , res )=>{
+    res.statusCode = 200
+    res.setHeader("Content-Type","text/html")
+    res.end('<h1>Hello World</h1><p>hello Try First backend Web On Browser</p>')
+}).listen(8000,()=> {
+    console.log("Server Started...");
+})

@@ -21,15 +21,28 @@
 //     console.log("Server Started...");
 // })
 
-const express = require('express')
-let app = express()
-app.get("/",(req , res)=>{
-res.send('Hello World')
-})
-app.get("/about",(req , res)=>{
-res.send('Welcome in about')
-})
-app.get("/servises",(req , res)=>{
-res.send('Welcome in services')
-})
-app.listen(80)
+// const express = require('express')
+// let app = express()
+// app.get("/",(req , res)=>{
+// res.send('Hello World')
+// })
+// app.get("/about",(req , res)=>{
+// res.send('Welcome in about')
+// })
+// app.get("/servises",(req , res)=>{
+// res.send('Welcome in services')
+// })
+// app.listen(80)
+
+// Connect Mongodb with Project 
+const { MongoClient, Collection } = require('mongodb')
+const url = "mongodb://127.0.0.1:27017"
+const products = "products"
+const clint = new MongoClient(url)
+let mongobdDemo =async ()=>{
+    let connection = await clint.connect()
+    let proDs = connection.db(products)
+    // let res = await psroDs.find({}).toArray()
+    console.log(Collection);
+}
+mongobdDemo()

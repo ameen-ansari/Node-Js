@@ -35,14 +35,16 @@
 // app.listen(80)
 
 // Connect Mongodb with Project 
-const { MongoClient, Collection } = require('mongodb')
-const url = "mongodb://127.0.0.1:27017"
-const products = "products"
+const { MongoClient } = require('mongodb')
+const url = 'mongodb://localhost:27017';
+// const products = "col1"
 const clint = new MongoClient(url)
 let mongobdDemo =async ()=>{
     let connection = await clint.connect()
-    let proDs = connection.db(products)
-    // let res = await psroDs.find({}).toArray()
-    console.log(Collection);
+    let db = connection.db("Demo")
+    let products = db.collection('products')
+    // const insertResult = await db.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }]);
+    const findResult = await products.find({}).toArray();
+    console.log(findResult);
 }
 mongobdDemo()

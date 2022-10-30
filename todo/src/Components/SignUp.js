@@ -19,13 +19,13 @@ export default function SignUp() {
     }
     let Sup = async (e) => {
         e.preventDefault()
-    try {
-        const users = await axios.post("http://localhost:4000/users",udata)
-    console.log("users", users);
-} catch (error) {
-    console.log("error", error);
-        
-    }
+        try {
+            const users = await axios.post("http://localhost:4000/", udata)
+            alert('User Added')
+        } catch (error) {
+            console.log("error", error);
+
+        }
     }
     let stylishobj1 = { flexDirection: 'column', display: 'flex', boxSizing: 'border-box', alignIitems: 'center', justifyContent: 'center', height: '100vh' }
     return (

@@ -4,6 +4,7 @@ const user = require('./Schemas')
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const axios = require('axios')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -11,9 +12,6 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('OK, Server is running!')
     res.end()
-    route.post('/', () => {
-        console.log('recevied');
-    })
 }).listen(4000, (err, reso) => {
     console.log('Server IS Running...');
 })

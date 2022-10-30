@@ -1,8 +1,9 @@
 import style1 from './Signup.module.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios"
 
 export default function SignUp() {
+    const [uudata, setuudata] = useState([])
     const [udata, setudata] = useState({
         UserName: "",
         phoneNumber: "",
@@ -20,11 +21,16 @@ export default function SignUp() {
     let Sup = async (e) => {
         e.preventDefault()
         try {
-            const users = await axios.post("http://localhost:4000/", udata)
+            setudata({
+                UserName: "",
+                phoneNumber: "",
+                mail: "",
+                password: ""
+            })
             alert('User Added')
+            let req = await axios.post("http://localhost:4000/", udata)
         } catch (error) {
             console.log("error", error);
-
         }
     }
     let stylishobj1 = { flexDirection: 'column', display: 'flex', boxSizing: 'border-box', alignIitems: 'center', justifyContent: 'center', height: '100vh' }
@@ -56,6 +62,9 @@ export default function SignUp() {
                     <button type="submit" className="m-2 btn btn-primary" onClick={Sup}>Create Acount</button>
                 </div>
             </form>
+            <div>
+
+            </div>
         </div >
     )
 }

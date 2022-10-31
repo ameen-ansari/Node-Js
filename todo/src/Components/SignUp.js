@@ -33,6 +33,11 @@ export default function SignUp() {
             console.log("error", error);
         }
     }
+    let fetchdata = async () => {
+        let data = await axios.get('http://localhost:4000/users')
+        setuudata(data.data)
+    }
+    fetchdata()
     let stylishobj1 = { flexDirection: 'column', display: 'flex', boxSizing: 'border-box', alignIitems: 'center', justifyContent: 'center', height: '100vh' }
     return (
         <div className={style1.parent1}>
@@ -61,10 +66,23 @@ export default function SignUp() {
                 <div className={`mb-3 ${style1.p3}`}>
                     <button type="submit" className="m-2 btn btn-primary" onClick={Sup}>Create Acount</button>
                 </div>
-            </form>
-            <div>
+                <div>
+                    {
+                        uudata.map((obj, i) => {
+                            return (
+                                <div key={i}>
+                                    <p >User Name = {obj.UserName}</p>
+                                    <p>user PhoneNumber = {obj.phoneNumber}</p>
+                                    <p>user mail = {obj.phoneNumber}</p>
+                                    <p>user Password = {obj.password}</p>
+                                    <hr />
+                                </div>
+                            )
 
-            </div>
+                        })
+                    }
+                </div>
+            </form>
         </div >
     )
 }

@@ -15,10 +15,15 @@ app.get('/', (req, res) => {
 }).listen(4000, (err, reso) => {
     console.log('Server IS Running...');
 })
-
+let myUser = "kuch nahi mila"
 app.post('/', async (req, res) => {
-    const myUser = new user(req.body)
+    myUser = new user(req.body)
     myUser.save().then(() => {
         console.log("User Saved");
     })
+})
+
+app.get('/users' ,async (req , res)=>{
+    let users = await user.find({})
+    res.status(200).json(users)
 })

@@ -1,15 +1,33 @@
 import style1 from './Signup.module.css'
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { receivedata, senddata } from '../Apis/Api'
 
 export default function SignUp() {
-    const [uudata, setuudata] = useState([])
-    const [udata, setudata] = useState({
+    const [userAlldata, setuserAlldata] = useState([])
+
+    let formValues = {
         UserName: "",
         phoneNumber: "",
         mail: "",
         password: ""
-    })
+    }
+
+    const [udata, setudata] = useState(formValues)
+
+    // let mydata = async () => {
+    //     let data = await receivedata()
+    //     setuserAlldata(data)
+    //     console.log(userAlldata);
+    // }
+
+    let receivedata = async () => {
+        let data = await axios.get('http://localhost:4000/users')
+        setuserAlldata(data.data)
+        console.log(data.data)
+    }
+
+
     let userdata = (e) => {
         let input = {
             [e.target.name]: e.target.value
@@ -21,23 +39,19 @@ export default function SignUp() {
     let Sup = async (e) => {
         e.preventDefault()
         try {
-            setudata({
-                UserName: "",
-                phoneNumber: "",
-                mail: "",
-                password: ""
-            })
+            setudata(formValues)
             alert('User Added')
-            let req = await axios.post("http://localhost:4000/", udata)
+            senddata(udata)
+            receivedata()
+            // mydata()
         } catch (error) {
             console.log("error", error);
         }
     }
-    let fetchdata = async () => {
-        let data = await axios.get('http://localhost:4000/users')
-        setuudata(data.data)
-    }
-    fetchdata()
+    useEffect(() => {
+            // mydata()
+            receivedata()
+    }, [])
     let stylishobj1 = { flexDirection: 'column', display: 'flex', boxSizing: 'border-box', alignIitems: 'center', justifyContent: 'center', height: '100vh' }
     return (
         <div className={style1.parent1}>
@@ -59,8 +73,8 @@ export default function SignUp() {
                         <input onChange={userdata} value={udata.phoneNumber} name="phoneNumber" type="number" className="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder='Phone Number' />
                     </div>
                     <div className="m-2 ">
-                        <label htmlFor="exampleInputEmail3" className="form-label">Password</label>
-                        <input onChange={userdata} name="password" value={udata.password} type="password" className="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder='Enter Password Here' />
+                        <label htmlFor="exampleInputEmail31" className="form-label">Password</label>
+                        <input onChange={userdata} name="password" value={udata.password} type="password" className="form-control" id="exampleInputEmail31" aria-describedby="emailHelp" placeholder='Enter Password Here' />
                     </div>
                 </div>
                 <div className={`mb-3 ${style1.p3}`}>
@@ -68,7 +82,7 @@ export default function SignUp() {
                 </div>
                 <div>
                     {
-                        uudata.map((obj, i) => {
+                        userAlldata.map((obj, i) => {
                             return (
                                 <div key={i}>
                                     <p >User Name = {obj.UserName}</p>

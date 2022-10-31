@@ -23,7 +23,7 @@ app.post('/', async (req, res) => {
     })
 })
 
-app.get('/users' ,async (req , res)=>{
+app.get('/users', async (req, res) => {
     let users = await user.find({})
     res.status(200).json(users)
 })

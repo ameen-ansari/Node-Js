@@ -29,7 +29,7 @@ export default function SignUp() {
     
     let fetchdata = async (e) => {
         e.preventDefault()
-        let data = await axios.get('http://localhost:4000/users')
+        let data = await axios.get('http://localhost:4000/users/usersdata')
         setuserAlldata(data.data)
         console.log('StateValue',userAlldata);
         console.log('From Request',data.data)
@@ -39,6 +39,7 @@ export default function SignUp() {
         e.preventDefault()
         let data = await axios.get('http://localhost:4000/users/reset')
     }
+
     let stylishobj1 = { flexDirection: 'column', display: 'flex', boxSizing: 'border-box', alignIitems: 'center', justifyContent: 'center', height: '100vh' }
     return (
         <div className={style1.parent1}>
@@ -65,7 +66,7 @@ export default function SignUp() {
                     </div>
                 </div>
                 <div className={`mb-3 ${style1.p3}`}>
-                    <button type="submit" className="m-2 btn btn-primary" onClick={onSubmitH}>Save</button>
+                    <button  className="m-2 btn btn-primary" onClick={onSubmitH}>Save</button>
                     <button  className="m-2 btn btn-primary" onClick={fetchdata}>fetchdata</button>
                     <button className="m-2 btn btn-primary" onClick={reset}>Reset</button>
                 </div>
